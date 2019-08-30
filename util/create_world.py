@@ -14,8 +14,12 @@ r_overlook = Room(title="Grand Overlook", description="""A steep cliff appears b
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm.""")
 
+r_prontera = Room(title="Prontera", description="This is Prontera")
+
 r_narrow = Room(title="Narrow Passage", description="""The narrow passage bends here from west
 to north. The smell of gold permeates the air.""")
+
+r_cliffedge = Room(title="Cliff Edge", description="You are at the edge of the cliff.  Don't fall!")
 
 r_treasure = Room(title="Treasure Chamber", description="""You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
@@ -25,7 +29,9 @@ r_outside.save()
 r_foyer.save()
 r_overlook.save()
 r_narrow.save()
+r_cliffedge.save()
 r_treasure.save()
+r_prontera.save()
 
 # Link rooms together
 r_outside.connectRooms(r_foyer, "n")
@@ -39,6 +45,12 @@ r_narrow.connectRooms(r_foyer, "w")
 
 r_narrow.connectRooms(r_treasure, "n")
 r_treasure.connectRooms(r_narrow, "s")
+
+r_narrow.connectRooms(r_cliffedge, "e")
+r_cliffedge.connectRooms(r_narrow, "w")
+
+r_overlook.connectRooms(r_prontera, "w")
+r_prontera.connectRooms(r_overlook, "e")
 
 players=Player.objects.all()
 for p in players:
